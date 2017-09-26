@@ -32,6 +32,14 @@ body {
 	border: 1px solid;
 }
 
+#moreinfo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+}
+
 /*#accuracy {
 	font-size: 0.6em;
 }*/

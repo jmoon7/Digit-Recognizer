@@ -8,7 +8,9 @@ window.onload = function() {
 	var accuracy = document.getElementById('accuracy');
 	var learnmore = document.getElementById('learnmore');
 	var container = document.getElementById('container');
+	var moreinfo = document.getElementById('moreinfo');
 	var smallCanvas = document.getElementById('smallCanvas');
+	var learnmoreSwitch = true;
 
 	resetprediction();
 
@@ -32,7 +34,17 @@ window.onload = function() {
 	});
 
 	learnmore.addEventListener('click', function() {
-		container.innerHTML = 'Details about things. Link to Tensorflow tutorial';
+		if (learnmoreSwitch) {
+			container.style.display = 'none';
+			moreinfo.style.display = 'block';
+			learnmore.innerHTML = 'back';
+			learnmoreSwitch = false
+		} else {
+			container.style.display = 'block';
+			moreinfo.style.display = 'none';
+			learnmore.innerHTML = 'learn more';
+			learnmoreSwitch = true
+		}
 	});
 
 	init();
