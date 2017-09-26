@@ -1,36 +1,37 @@
 
 body {
 	font-family: 'Source Sans Pro', sans-serif;
-	zoom: 175%;
 	text-align: center;
 }
 
-h1 {
-	font-size: 1.5em;	
-}
-
-#name {
+#footer {
 	position: absolute;
-	bottom: 6%;
+	bottom: 5%;
 	left: 50%;
 	transform: translate(-50%, 0);
 	font-style: italic;
-	font-size: 0.8em;
+	font-size: 1em;
 }
 
 #container {
 	margin-top: 10%;
 }
 
-
-canvas {
-	border:2px solid;
+#canvas {
+	border: 1px solid;
 }
 
-#accuracy {
+#prediction {
+	font-size: 1.2em;
+	margin-top: 2%;
+}
+
+#smallCanvas {
+	display: block;
+	margin: 10px auto;
+	border: 1px solid;
+}
+
+/*#accuracy {
 	font-size: 0.6em;
-}
-
-p {
-	font-size: 0.6em;
-}
+}*/

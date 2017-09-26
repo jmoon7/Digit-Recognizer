@@ -11,15 +11,13 @@
 
 	<!-- Styling -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,800" rel="stylesheet">
-	<link rel="stylesheet" href="style.css">	
+	<link rel="stylesheet" href="style.css">
 
 	<!-- Javascript -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.1/math.min.js"></script>
 
 	<script src="softmaxreg.js"></script>
-	<script src="canvasexample.js"></script>
-	<script src="test.js"></script>
+	<script src="canvas.js"></script>
 	<script src="script.js"></script>
 </head>
 
@@ -30,17 +28,20 @@
 <body>
 	<div id="container">
 		<h1> MNIST Classifier </h1>
-		<div id="canvas">
-	        <canvas id="can" width="28" height="28"></canvas>
+		<div>
+	    <canvas id="canvas" width=280 height=280></canvas>
+			<canvas id="smallCanvas" width=28 height=28></canvas>
 		</div>
 		<button type="button" id="submit">submit</button>
 		<button type="button" id="clear">clear</button>
 		<div id="prediction"> </div>
-		<div id="accuracy"> </div>
+		<!-- <div id="accuracy"> </div> -->
 	</div>
-	<div id="name"> Jung Woo Moon <br>
-		<p> Classification using Softmax Regression. Accuracy around ~90%, but still shitty. </p>
-	 </div>
+	<div id="footer">
+		<div> Jung Woo Moon </div>
+		<p> Classification using Softmax Regression. Will implement a neural network soon. </p>
+		<button type="button" id="learnmore">learn more</button>
+	</div>
 </body>
 
 </html>

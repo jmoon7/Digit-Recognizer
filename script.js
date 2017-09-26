@@ -1,15 +1,18 @@
 
 'use strict';
 
-// idea: use putImageData to, after classifying the written digit, erase the canvas
-// and display a well written version of that number; autofix your handwriting.
+window.onload = function() {
+	var submit = document.getElementById('submit');
+	var prediction = document.getElementById('prediction');
+	var clear = document.getElementById('clear');
+	var accuracy = document.getElementById('accuracy');
+	var learnmore = document.getElementById('learnmore');
+	var container = document.getElementById('container');
+	var smallCanvas = document.getElementById('smallCanvas');
 
-/* ------------------------------------------ */
+	resetprediction();
 
-$(document).ready(function() {
-	resetprediction();	
-
-	$('#submit').click(function() {
+	submit.addEventListener('click', function() {
 		// Flatten image (28x28 -> 784)
 		var x = canvasToFlatImg();
 		var result = predictor(x);
@@ -17,23 +20,29 @@ $(document).ready(function() {
 		if (result === -1) {
 			text = "Hmm... Try again";
 		}
-		$('#prediction').text(text);
+		prediction.innerHTML = text;
 	});
 
-	$('#clear').click(function() {
+	clear.addEventListener('click', function() {
 		erase();
-		$('#accuracy').empty();
+		var newCtx = smallCanvas.getContext("2d");
+		newCtx.clearRect(0, 0, w, h);
+		// $('#accuracy').empty();
 		resetprediction();
 	});
 
+	learnmore.addEventListener('click', function() {
+		container.innerHTML = 'Details about things. Link to Tensorflow tutorial';
+	});
+
 	init();
-});
+}
 
 
 /* ----------------- functions ------------------ */
 
 function resetprediction() {
-	$('#prediction').text("Draw a number from 0 to 9");	
+	prediction.innerHTML = "Draw a number from 0 to 9";
 }
 
 // Softmax function
@@ -52,7 +61,7 @@ function argmax(arr) {
 	var text = "";
 	// argmax
 	for (var i = 0; i<10; i++) {
-		text = text + "<br>" + "<b>" + i + "</b>" + ": " + Math.round(arr[i]*1000)/10 + "%";
+		// text = text + "<br>" + "<b>" + i + "</b>" + ": " + Math.round(arr[i]*1000)/10 + "%";
 		if (arr[i] > count) {
 			count = arr[i];
 			num = i;
@@ -61,7 +70,7 @@ function argmax(arr) {
 	if (count < 0.5) {
 		num = -1;
 	} else {
-		$('#accuracy').html(text);
+		// $('#accuracy').html(text);
 	}
 	return num;
 }
@@ -70,14 +79,18 @@ function argmax(arr) {
 function predictor(x) {
 	var y = softmax(math.add(math.multiply(math.transpose(softmaxreg.W), x), softmaxreg.b));
 	return argmax(y);
-};
+}
 
 function canvasToFlatImg() {
-    var imageData = ctx.getImageData(0, 0, 28, 28).data;
+		var newCtx = smallCanvas.getContext("2d");
+		newCtx.drawImage(canvas, 0, 0, 280, 280, 0, 0, 28, 28);
+
+	  // one-dimensional array containing the data in the RGBA order
+    var imageData = newCtx.getImageData(0, 0, 28, 28).data;
     var result = [];
+    // extract the alpha (ignore RGB)
     for (var i=3; i<imageData.length; i+=4) {
     	result[(i+1)/4 - 1] = imageData[i] / 255;
     }
     return result;
-};
-
+}
